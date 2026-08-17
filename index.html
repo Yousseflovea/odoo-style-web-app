@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0f172a" />
+  <title>شحناتي | إدارة الطلبات والشحن</title>
+  <meta name="description" content="نظام شحناتي لإدارة العملاء والمشغلين والخياطين وشركات الشحن والتحصيل والأرباح." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div id="toast"></div>
+
+  <section id="authView" class="auth-view">
+    <div class="auth-card">
+      <div class="brand-mark">ش</div>
+      <div>
+        <h1>شحناتي</h1>
+        <p>إدارة الطلبات من المشغل حتى التسليم والتحصيل.</p>
+      </div>
+      <div class="auth-tabs">
+        <button class="tab-btn active" data-auth-tab="login">دخول</button>
+        <button class="tab-btn" data-auth-tab="signup">إنشاء مدير</button>
+      </div>
+      <form id="loginForm" class="stack gap-12">
+        <label>البريد الإلكتروني<input id="loginEmail" type="email" required autocomplete="email" placeholder="manager@example.com"></label>
+        <label>كلمة المرور<input id="loginPassword" type="password" required minlength="6" autocomplete="current-password" placeholder="••••••••"></label>
+        <button class="btn primary wide" type="submit">دخول لوحة التحكم</button>
+      </form>
+      <form id="signupForm" class="stack gap-12 hidden">
+        <label>البريد الإلكتروني<input id="signupEmail" type="email" required autocomplete="email"></label>
+        <label>كلمة المرور<input id="signupPassword" type="password" required minlength="6" autocomplete="new-password"></label>
+        <button class="btn primary wide" type="submit">إنشاء حساب المدير</button>
+        <small>بعد إنشاء الحساب يمكنك تحميل بيانات تجريبية من الإعدادات لعرض النظام فورًا.</small>
+      </form>
+      <div class="auth-note">قاعدة البيانات مؤمنة بسياسات وصول مرتبطة بالمستخدم.</div>
+    </div>
+  </section>
+
+  <div id="appView" class="app hidden">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand-row"><div class="brand-mark small">ش</div><div><strong>شحناتي</strong><span>Shipping Manager</span></div></div>
+      <nav id="nav">
+        <button class="nav-item active" data-page="dashboard"><span>⌂</span> لوحة التحكم</button>
+        <button class="nav-item" data-page="orders"><span>▣</span> الطلبات</button>
+        <button class="nav-item" data-page="customers"><span>👤</span> العملاء</button>
+        <button class="nav-item" data-page="workshops"><span>✂</span> المشغلين والخياطين</button>
+        <button class="nav-item" data-page="shipping"><span>🚚</span> شركات الشحن</button>
+        <button class="nav-item" data-page="reports"><span>◫</span> التقارير</button>
+        <button class="nav-item" data-page="settings"><span>⚙</span> التسعير والإعدادات</button>
+      </nav>
+      <div class="sidebar-footer">
+        <div id="userEmail" class="muted tiny"></div>
+        <button id="logoutBtn" class="btn ghost wide">تسجيل الخروج</button>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <button id="menuBtn" class="icon-btn mobile-only">☰</button>
+        <div><h2 id="pageTitle">لوحة التحكم</h2><p id="pageSubtitle">نظرة سريعة على الطلبات والأرباح</p></div>
+        <div class="top-actions">
+          <button id="themeBtn" class="icon-btn" title="الوضع الليلي">◐</button>
+          <button class="btn primary" id="quickOrderBtn">+ طلب جديد</button>
+        </div>
+      </header>
+      <section id="content" class="content"></section>
+    </main>
+  </div>
+
+  <div id="modal" class="modal-backdrop hidden"><div class="modal-card"><div class="modal-head"><h3 id="modalTitle"></h3><button id="modalClose" class="icon-btn">×</button></div><div id="modalBody"></div></div></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
