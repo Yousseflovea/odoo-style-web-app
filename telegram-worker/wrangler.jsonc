@@ -1,8 +1,13 @@
 {
+  "$schema": "./node_modules/wrangler/config-schema.json",
   "name": "taskdesk-telegram-ai",
   "main": "src/index.js",
-  "compatibility_date": "2026-08-01",
+  "compatibility_date": "2026-08-19",
   "ai": { "binding": "AI" },
+  "observability": {
+    "enabled": true,
+    "head_sampling_rate": 1
+  },
   "vars": {
     "SUPABASE_URL": "https://rknmkwnlsaknmtwxupvf.supabase.co",
     "SUPABASE_ANON_KEY": "sb_publishable_jeNI0OZSFYutImREvNNHFw_-JNnRf--",
