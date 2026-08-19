@@ -1,0 +1,65 @@
+/* Final responsive QA polish */
+@media (max-width:767px){
+  .control-panel.record-mode .searchbar{display:none}
+  .control-panel.record-mode .cp-actions{display:flex;justify-content:flex-end;gap:6px}
+  .control-panel.record-mode .cp-row{gap:5px}
+  .control-panel.record-mode+.content{padding-top:7px}
+  .control-panel.record-mode~.content .statusbar{top:calc(var(--topbar) + 55px + var(--safe-top))}
+
+  /* Odoo-like mobile filter sheet */
+  .search-tools>.dropdown,
+  .dropdown{
+    position:fixed!important;
+    inset-inline:8px!important;
+    bottom:calc(var(--mobile-nav-h) + var(--safe-bottom) + 8px)!important;
+    top:auto!important;
+    left:auto;
+    right:auto;
+    width:auto!important;
+    max-height:min(68dvh,560px);
+    overflow:auto;
+    z-index:140!important;
+    background:var(--surface)!important;
+    border:1px solid var(--border)!important;
+    border-radius:14px!important;
+    box-shadow:0 18px 60px rgba(0,0,0,.28)!important;
+    padding:8px!important;
+  }
+  .search-tools .dropdown h4,.dropdown h4{margin:8px 8px 5px;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.03em}
+  .search-tools .dropdown button,.dropdown button{
+    display:flex!important;
+    width:100%!important;
+    min-height:44px!important;
+    align-items:center!important;
+    justify-content:flex-start!important;
+    border:0!important;
+    border-radius:8px!important;
+    background:transparent!important;
+    color:var(--text)!important;
+    font-size:14px!important;
+    text-align:start!important;
+    padding:9px 10px!important;
+  }
+  .search-tools .dropdown button:hover,.dropdown button:hover{background:var(--surface-2)!important}
+
+  .modal-head .btn-icon{width:42px;height:42px;min-height:42px;border-radius:50%}
+  .modal-body{-webkit-overflow-scrolling:touch}
+  .modal-foot{box-shadow:0 -5px 18px rgba(0,0,0,.07)}
+
+  .form-sheet-wrap .content{padding-inline:0}
+  .status-steps{-webkit-overflow-scrolling:touch}
+  .smart-buttons{-webkit-overflow-scrolling:touch}
+  .tabs{-webkit-overflow-scrolling:touch}
+
+  /* Never allow RTL content to create horizontal page overflow */
+  .content,.panel,.o-card,.form-sheet,.chatter,.modal-body,.modal-field{max-width:100%;min-width:0}
+  .record-title,.kc-title,.kc-desc,.agenda-title,.chatter-body,.rich-box{overflow-wrap:anywhere;word-break:break-word}
+}
+
+@media (min-width:768px) and (max-width:1100px){
+  .content{padding:14px}
+  .form-sheet-wrap{grid-template-columns:minmax(0,1fr)}
+  .chatter{max-height:none}
+  .modal{width:min(760px,92vw)}
+  .modal-grid{grid-template-columns:1fr 1fr}
+}
