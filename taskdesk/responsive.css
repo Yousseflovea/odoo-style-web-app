@@ -1,0 +1,211 @@
+/* TaskDesk responsive layer — Odoo-inspired, mobile-first */
+:root{
+  --mobile-nav-h:68px;
+  --safe-bottom:env(safe-area-inset-bottom,0px);
+  --safe-top:env(safe-area-inset-top,0px);
+}
+html{overflow-x:hidden}
+body{overflow-x:hidden;-webkit-tap-highlight-color:transparent}
+button,.btn,.side-item,.tab,.smart,.kanban-card{touch-action:manipulation}
+button,.btn,input,select,textarea{min-height:40px}
+input,select,textarea{font-size:16px}
+.main,.content,.control-panel,.cp-row,.cp-actions{min-width:0}
+.mobile-sidebar-backdrop{display:none}
+.mobile-create-fab{display:none}
+.mobile-card-list{display:none}
+.mobile-agenda{display:none}
+
+/* Better focus and tap feedback */
+button:focus-visible,.btn:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid color-mix(in srgb,var(--odoo) 75%,#fff);outline-offset:2px}
+@media (hover:hover){.kanban-card:hover,.o-card:hover{transition:box-shadow .15s ease,border-color .15s ease}}
+
+/* Tablet */
+@media (max-width:1100px){
+  :root{--sidebar:236px}
+  .topnav{display:none}
+  .topbar .brand{width:auto;flex:1}
+  .user-chip span{display:none}
+  .body{display:block}
+  .sidebar{position:fixed;inset-block-start:var(--topbar);inset-inline-start:0;height:calc(100dvh - var(--topbar));z-index:80;transform:translateX(calc(-100% - 16px));box-shadow:0 14px 40px rgba(0,0,0,.2);transition:transform .22s ease;width:min(320px,82vw)}
+  [dir="rtl"] .sidebar{inset-inline-start:auto;inset-inline-end:0;transform:translateX(calc(100% + 16px))}
+  .sidebar.open{transform:translateX(0)}
+  .mobile-sidebar-backdrop{display:block;position:fixed;inset:var(--topbar) 0 0;background:rgba(15,18,22,.38);backdrop-filter:blur(2px);z-index:70;opacity:0;pointer-events:none;transition:opacity .2s ease}
+  .mobile-sidebar-backdrop.show{opacity:1;pointer-events:auto}
+  .main{width:100%}
+  .kpi-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .dashboard-grid{grid-template-columns:1fr 1fr}
+  .dashboard-grid>.panel:last-child{grid-column:1/-1}
+  .form-sheet-wrap{grid-template-columns:1fr}
+  .chatter{min-height:0}
+  .report-grid{grid-template-columns:1fr 1fr}
+}
+
+/* Phone / small tablet */
+@media (max-width:767px){
+  :root{--topbar:56px;--radius:8px;--radius-lg:12px}
+  body{padding-bottom:calc(var(--mobile-nav-h) + var(--safe-bottom))}
+  .app-shell{min-height:100dvh}
+  .topbar{height:calc(var(--topbar) + var(--safe-top));padding-top:var(--safe-top);position:sticky}
+  .topbar .brand{padding-inline:10px;gap:8px;font-size:18px;min-width:0}
+  .brand-mark{width:32px;height:32px;border-radius:9px;flex:0 0 auto}
+  .app-switcher{width:40px;height:40px;flex:0 0 auto}
+  .systray{padding-inline-end:4px;gap:0}
+  .systray>button{width:40px;height:40px}
+  .systray>button:nth-of-type(3){display:none}
+  .user-chip{padding:0 4px}
+  .avatar{width:34px;height:34px}
+  .body{min-height:calc(100dvh - var(--topbar))}
+
+  /* Control panel becomes an Odoo-like mobile command bar */
+  .control-panel{position:sticky;top:calc(var(--topbar) + var(--safe-top));padding:8px 10px;z-index:35;box-shadow:0 2px 9px rgba(0,0,0,.06)}
+  .cp-row{display:grid;grid-template-columns:1fr;gap:8px}
+  .cp-row>div:first-child{display:flex;align-items:center;gap:7px;min-width:0}
+  .breadcrumbs{min-width:0;overflow:hidden;white-space:nowrap}
+  .breadcrumbs b{font-size:16px;overflow:hidden;text-overflow:ellipsis}
+  .crumb-hide{display:none!important}
+  .cp-actions{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:6px;width:100%}
+  .cp-actions>.btn-primary{grid-column:1;white-space:nowrap;padding-inline:13px}
+  .searchbar{grid-column:2;min-width:0;width:100%;height:40px}
+  .searchbar input{min-width:0;width:100%;padding-inline:7px}
+  .search-tools button{width:40px;font-size:0;padding:0;display:grid;place-items:center}
+  .search-tools button svg{margin:0}
+  .view-switcher{grid-column:3;align-self:center}
+  .view-switcher button{width:38px;height:38px}
+  .view-switcher button:not(.active){display:none}
+  .cp-actions>.btn:not(.btn-primary):not(.btn-icon){min-height:38px}
+
+  .content{padding:10px 10px 16px;max-width:none}
+  .page-title{font-size:22px;line-height:1.25;overflow-wrap:anywhere}
+  .subtle{font-size:12px}
+  .o-card{box-shadow:0 1px 5px rgba(33,37,41,.07)}
+
+  /* Dashboard */
+  .content>div[style*="justify-content:space-between"][style*="margin-bottom"]{display:grid!important;grid-template-columns:1fr!important;gap:5px!important}
+  .kpi-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-bottom:10px}
+  .kpi{padding:12px;min-height:108px}
+  .kpi .value{font-size:26px}
+  .kpi::after{width:62px;height:62px;inset-inline-end:-20px;top:-20px}
+  .dashboard-grid{grid-template-columns:1fr;gap:9px}
+  .dashboard-grid>.panel:last-child{grid-column:auto}
+  .panel{padding:12px}
+  .panel h3{font-size:14px;margin-bottom:10px}
+  .donut-wrap{align-items:center;gap:12px}
+  .donut{width:126px;flex:0 0 126px}
+  .donut:after{inset:24px}
+  .donut-center b{font-size:20px}
+  .legend{font-size:11px}
+  .bar-row{grid-template-columns:68px minmax(0,1fr) 22px;gap:6px}
+  .deadline{grid-template-columns:38px minmax(0,1fr) auto;gap:7px}
+
+  /* Tables become readable cards on mobile */
+  .list-wrap{overflow:visible}
+  .o-list{display:block;background:transparent;border:0}
+  .o-list thead{display:none}
+  .o-list tbody{display:grid;gap:8px}
+  .o-list tr{display:block;background:var(--surface);border:1px solid var(--border);border-radius:10px;box-shadow:0 1px 4px rgba(0,0,0,.05);padding:9px 10px}
+  .o-list td{display:grid;grid-template-columns:minmax(88px,38%) minmax(0,1fr);gap:8px;align-items:center;border:0;padding:5px 1px;white-space:normal;overflow-wrap:anywhere}
+  .o-list td::before{content:attr(data-label);color:var(--muted);font-size:11px;font-weight:600}
+  .o-list td:first-child{display:none}
+  .o-list td .link{font-weight:700}
+  .o-list tr:hover td{background:transparent}
+
+  /* Kanban is swipeable, one stage almost full width */
+  .kanban{gap:9px;padding:0 1px 12px;scroll-snap-type:x mandatory;scroll-padding-inline:10px;-webkit-overflow-scrolling:touch}
+  .kanban-col{min-width:calc(100vw - 36px);width:calc(100vw - 36px);max-width:430px;scroll-snap-align:start;border-radius:10px}
+  .kanban-head{position:sticky;top:0;background:var(--surface-2);z-index:2;padding:11px 12px}
+  .kanban-body{padding:8px}
+  .kanban-card{padding:12px;border-radius:9px;cursor:pointer}
+  .kc-title{font-size:14px;line-height:1.35}
+  .kc-desc{font-size:12.5px}
+  .mobile-stage-select{width:100%;margin-top:9px;border:1px solid var(--border);border-radius:7px;background:var(--surface-2);padding:7px 9px;color:var(--text)}
+
+  /* Form view behaves like Odoo mobile */
+  .form-sheet-wrap{display:block}
+  .form-sheet,.chatter{border-radius:0;border-inline:0;box-shadow:none}
+  .form-sheet{min-height:0}
+  .statusbar{position:sticky;top:calc(var(--topbar) + 109px + var(--safe-top));z-index:24;display:grid;grid-template-columns:1fr;gap:7px;padding:7px 10px}
+  .statusbar>.cp-actions{display:flex;overflow:auto;scrollbar-width:none}
+  .status-steps{display:flex;flex-wrap:nowrap;overflow:auto;scrollbar-width:none;gap:2px;padding-bottom:1px}
+  .status-step{flex:0 0 auto;padding:7px 11px;border-radius:5px;min-height:36px}
+  .sheet{padding:14px 11px 18px}
+  .record-title{font-size:23px;line-height:1.3;padding-bottom:12px}
+  .smart-buttons{display:flex;flex-wrap:nowrap;overflow:auto;scroll-snap-type:x proximity;gap:6px;padding-bottom:3px;scrollbar-width:none}
+  .smart{flex:0 0 100px;min-width:100px;scroll-snap-align:start}
+  .form-grid{grid-template-columns:1fr;gap:12px}
+  .field,.field.full{grid-column:auto;grid-template-columns:1fr;gap:4px;align-items:start}
+  .field label{font-size:11px;font-weight:650}
+  .field>div{min-width:0;overflow-wrap:anywhere}
+  .rich-box{min-height:76px;padding:10px;font-size:13px}
+  .notebook{margin-top:15px}
+  .tabs{overflow:auto;flex-wrap:nowrap;scrollbar-width:none}
+  .tab{flex:0 0 auto;white-space:nowrap;padding:10px 11px}
+  .tab-pane{padding:12px 0}
+  .chatter{margin-top:9px;min-height:0}
+  .chatter-head{position:sticky;top:calc(var(--topbar) + 58px + var(--safe-top));background:var(--surface);z-index:3;overflow:auto}
+  .chatter-feed{padding:10px}
+  .chatter-item{grid-template-columns:30px minmax(0,1fr);gap:8px}
+  .chatter-body{overflow-wrap:anywhere}
+
+  /* Full-screen mobile modals */
+  .modal-backdrop{padding:0!important;align-items:stretch!important;justify-content:stretch!important;z-index:120;background:var(--surface)!important}
+  .modal-backdrop>.modal,.modal{width:100vw!important;max-width:none!important;height:100dvh!important;max-height:none!important;border-radius:0!important;margin:0!important;display:flex!important;flex-direction:column!important;background:var(--surface)!important}
+  .modal-head{position:sticky;top:0;z-index:3;min-height:56px;padding:10px 12px!important;background:var(--surface);border-bottom:1px solid var(--border)}
+  .modal-head h2{font-size:19px;margin:0}
+  .modal-body{flex:1;overflow:auto;padding:13px 12px calc(88px + var(--safe-bottom))!important}
+  .modal-grid{grid-template-columns:1fr!important;gap:13px!important}
+  .modal-field,.modal-field.full{grid-column:auto!important}
+  .modal-field label{font-size:12px;font-weight:650;margin-bottom:5px}
+  .modal-field input,.modal-field select,.modal-field textarea{width:100%;min-height:46px;border:1px solid var(--border)!important;border-radius:8px!important;padding:10px!important;background:var(--surface)!important}
+  .modal-field textarea{min-height:90px;resize:vertical}
+  .modal-foot{position:fixed!important;inset-inline:0;bottom:0;z-index:5;background:var(--surface);padding:10px 12px calc(10px + var(--safe-bottom))!important;border-top:1px solid var(--border);display:grid!important;grid-template-columns:1fr 1.35fr;gap:8px}
+  .modal-foot .btn{min-height:46px}
+
+  /* Calendar: full calendar stays available via horizontal scroll, agenda shown first */
+  .calendar-head{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+  .calendar-head>div{display:flex;gap:4px}
+  .calendar-scroll{overflow:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--border);border-radius:8px}
+  .calendar-grid{min-width:720px}
+  .mobile-agenda{display:grid;gap:8px;margin-bottom:10px}
+  .agenda-card{display:grid;grid-template-columns:52px minmax(0,1fr) auto;gap:9px;align-items:center;background:var(--surface);border:1px solid var(--border);border-radius:9px;padding:9px}
+  .agenda-date{text-align:center;background:var(--surface-2);border-radius:7px;padding:5px 3px;font-size:10px}
+  .agenda-date b{font-size:16px;display:block}
+  .agenda-title{font-weight:650;font-size:13px;overflow-wrap:anywhere}
+
+  /* Reports/users/settings */
+  .report-grid,.user-grid,.settings-grid{grid-template-columns:1fr!important;gap:9px!important}
+  .report-card,.user-card,.settings-card{padding:12px!important}
+  .mini-bars{overflow:auto;min-height:170px}
+  .user-head{align-items:center}
+  .toggle-row{gap:10px;overflow-wrap:anywhere}
+
+  /* Fixed bottom nav is the primary mobile navigation */
+  .mobile-bottom{display:grid!important;grid-template-columns:repeat(5,1fr);position:fixed;z-index:90;inset-inline:0;bottom:0;min-height:calc(var(--mobile-nav-h) + var(--safe-bottom));padding:5px 4px calc(5px + var(--safe-bottom));background:color-mix(in srgb,var(--surface) 94%,transparent);border-top:1px solid var(--border);box-shadow:0 -5px 20px rgba(0,0,0,.08);backdrop-filter:blur(14px)}
+  .mobile-bottom button{border:0;background:transparent;color:var(--muted);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-width:0;padding:3px 2px;font-size:9.5px;border-radius:9px}
+  .mobile-bottom button.active{color:var(--odoo);background:var(--odoo-soft)}
+  .mobile-bottom .mobile-create-fab{display:flex;background:var(--odoo);color:#fff;width:48px;height:48px;min-height:48px;border-radius:50%;justify-self:center;align-self:center;margin-top:-22px;box-shadow:0 6px 16px rgba(113,75,103,.32);font-size:25px;line-height:1}
+  .mobile-bottom .mobile-create-fab span{display:none}
+
+  .toast{bottom:calc(var(--mobile-nav-h) + var(--safe-bottom) + 10px)!important;max-width:calc(100vw - 24px)}
+}
+
+/* Very narrow phones */
+@media (max-width:390px){
+  .topbar .brand>span:last-child{font-size:17px}
+  .systray>button:first-child{display:none}
+  .kpi-grid{grid-template-columns:1fr 1fr}
+  .kpi{padding:10px;min-height:100px}
+  .cp-actions{grid-template-columns:auto minmax(0,1fr) auto}
+  .cp-actions>.btn-primary{font-size:12px;padding-inline:10px}
+  .searchbar .search-icon{padding-inline-start:7px}
+  .donut-wrap{align-items:flex-start}
+  .donut{width:110px;flex-basis:110px}
+  .agenda-card{grid-template-columns:46px minmax(0,1fr)}
+  .agenda-card>.priority-pill{grid-column:2}
+}
+
+/* Desktop polish */
+@media (min-width:1101px){
+  .mobile-bottom{display:none!important}
+  .sidebar{transition:width .18s ease}
+  .content{padding:18px 20px 28px}
+}
