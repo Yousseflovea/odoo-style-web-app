@@ -1,4 +1,4 @@
-name: Deploy Shahnaty + TaskDesk to GitHub Pages
+name: Deploy Shahnaty to GitHub Pages
 
 on:
   push:
@@ -21,60 +21,14 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout main site
+      - name: Checkout
         uses: actions/checkout@v6
-
-      - name: Checkout TaskDesk source
-        uses: actions/checkout@v6
-        with:
-          ref: taskdesk-app
-          path: .taskdesk-source
-
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
-
-      - name: Build self-contained TaskDesk
-        shell: bash
-        run: |
-          mkdir -p taskdesk
-          cp .taskdesk-source/taskdesk.html taskdesk/index.html
-
-          mkdir -p .taskdesk-build
-          cd .taskdesk-build
-          npm init -y >/dev/null 2>&1
-          npm install --silent @supabase/supabase-js@2.57.4 esbuild@0.25.9
-          cat > supabase-entry.js <<'EOF'
-          import { createClient } from '@supabase/supabase-js'
-          window.createClient = createClient
-          EOF
-          npx esbuild supabase-entry.js --bundle --format=iife --minify --outfile=../taskdesk/supabase.bundle.js
-          cd ..
-
-          python - <<'PY'
-          from pathlib import Path
-          p = Path('taskdesk/index.html')
-          s = p.read_text()
-          old = "<script type=\"module\">import{createClient}from'https://esm.sh/@supabase/supabase-js@2.57.4';"
-          new = "<script src=\"./supabase.bundle.js\"></script><script>const {createClient}=window;"
-          if old not in s:
-              raise SystemExit('Expected Supabase import was not found in TaskDesk source')
-          s = s.replace(old, new, 1)
-          s = s.replace('<div id=\"root\"></div>', '<div id=\"root\"><div style=\"min-height:100vh;display:grid;place-items:center;font-family:system-ui;background:#f5f7fb;color:#0f172a\"><div style=\"text-align:center\"><strong style=\"font-size:26px\">TaskDesk</strong><p>جاري تهيئة التطبيق...</p></div></div></div>', 1)
-          p.write_text(s)
-          PY
-
-          rm -rf .taskdesk-source .taskdesk-build
-
       - name: Configure Pages
         uses: actions/configure-pages@v5
-
       - name: Upload site
         uses: actions/upload-pages-artifact@v4
         with:
           path: '.'
-
       - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v4
