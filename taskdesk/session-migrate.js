@@ -1,0 +1,1 @@
+try{if(!localStorage.getItem('td_session')&&localStorage.getItem('td_s')){localStorage.setItem('td_session',localStorage.getItem('td_s'))}}catch(e){}
