@@ -7,7 +7,7 @@
   function loadTelegramAdmin(){
     if(document.querySelector('script[data-taskdesk-telegram-admin]')) return;
     const s=document.createElement('script');
-    s.src='./telegram-admin.js?v=1';
+    s.src='./telegram-admin.js?v=2e6ae74e';
     s.dataset.taskdeskTelegramAdmin='1';
     document.head.appendChild(s);
   }
