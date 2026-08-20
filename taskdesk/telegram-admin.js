@@ -1,6 +1,7 @@
 'use strict';
 (() => {
   const BOT_EMAIL = 'youssem.am+taskdeskbot@gmail.com';
+  const BOT_USER_ID = '8e6f95b2-cc71-4f6e-8792-f714cea6fac9';
   const originalRenderUsers = renderUsers;
 
   renderUsers = function () {
@@ -29,14 +30,15 @@
       btn.disabled = true;
       btn.textContent = prefs.lang==='ar'?'جاري التفعيل...':'Authorizing...';
       try {
-        const rows = await rest('profiles', `email=eq.${encodeURIComponent(BOT_EMAIL)}`, {
+        const rows = await rest('profiles', `id=eq.${BOT_USER_ID}`, {
           method: 'PATCH',
           headers: { Prefer: 'return=representation' },
           body: { is_active: true, role: 'ADMIN', full_name: 'TaskDesk Telegram Bot' }
         });
-        if (!rows || !rows.length) throw new Error('Bot profile not found');
+        if (!rows || !rows.length) throw new Error('Bot profile update was blocked');
         toast(prefs.lang==='ar'?'تم تفعيل Telegram Bot كـ Admin':'Telegram Bot authorized as Admin');
         btn.textContent = prefs.lang==='ar'?'تم التفعيل ✓':'Authorized ✓';
+        await loadData();
       } catch (e) {
         btn.disabled = false;
         btn.textContent = prefs.lang==='ar'?'تفعيل البوت':'Authorize Bot';
