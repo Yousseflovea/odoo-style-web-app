@@ -11,6 +11,7 @@
   "vars": {
     "SUPABASE_URL": "https://rknmkwnlsaknmtwxupvf.supabase.co",
     "SUPABASE_ANON_KEY": "sb_publishable_jeNI0OZSFYutImREvNNHFw_-JNnRf--",
+    "SUPABASE_BOT_EMAIL": "youssem.am+taskdeskbot@gmail.com",
     "AI_MODEL": "@cf/meta/llama-3.1-8b-instruct-fast",
     "TASKDESK_URL": "https://yousseflovea.github.io/odoo-style-web-app/taskdesk/"
   }
