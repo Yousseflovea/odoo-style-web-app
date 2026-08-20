@@ -1,7 +1,7 @@
 {
   "$schema": "./node_modules/wrangler/config-schema.json",
   "name": "taskdesk-telegram-ai",
-  "main": "src/index.js",
+  "main": "src/entry.js",
   "compatibility_date": "2026-08-19",
   "ai": { "binding": "AI" },
   "observability": {
